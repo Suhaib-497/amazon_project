@@ -1,5 +1,6 @@
 import {cart,addTOCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { monyFormat } from './utilis/mony.js';
 
 let data='';
 products.forEach((product)=>{
@@ -23,7 +24,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${monyFormat(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
