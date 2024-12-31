@@ -2,5 +2,5 @@
 
 export function monyFormat(item){
 
-   return (item/100).toFixed(2);
+   return (Math.round(item) /100).toFixed(2);
 }
