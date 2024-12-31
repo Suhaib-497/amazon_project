@@ -1,4 +1,4 @@
-import { monyFormat } from "../Scripts/utilis/mony.js";
+import { monyFormat } from "../../Scripts/utilis/mony.js";
 
 describe('test suit:Format currency',()=>{
     it('converts cents into dollars',()=>{
