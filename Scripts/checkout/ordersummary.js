@@ -1,22 +1,20 @@
 import { cart, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
-import { products, getProduct } from '../../data/products.js';
+import { products, getProduct,numberOfItems } from '../../data/products.js';
 import { monyFormat } from '../utilis/mony.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryOpition } from '../../data/deliveryoption.js';
 import {paymentSummary} from './paymentsummary.js'
 const today = dayjs();
-
+ 
 export function renderSummaryOrder() {
   let checkOutHtml = '';
-  let numberOfItems = 0;
+ let numberOfItemss=0;
 
   cart.forEach((item) => {
     const productId = item.Id;
     const matchingitem = getProduct(productId);
-
-    if (matchingitem) {
-      numberOfItems++;
-    }
+     numberOfItemss += numberOfItems(productId);
+   
 
     const deliveryoptionId = item.deleveryId;
     const deliveryoption = getDeliveryOpition(deliveryoptionId)
@@ -56,7 +54,7 @@ export function renderSummaryOrder() {
   });
 
   document.querySelector('.js-order-summary').innerHTML = checkOutHtml;
-  document.querySelector('.js-items').innerHTML = numberOfItems;
+  document.querySelector('.js-items').innerHTML = numberOfItemss;
 
   attachEventListeners();
 }

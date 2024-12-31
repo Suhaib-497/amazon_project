@@ -1,12 +1,14 @@
 import {cart} from '../../data/cart.js'
-import { getProduct } from '../../data/products.js';
+import { getProduct,numberOfItems } from '../../data/products.js';
 import { getDeliveryOpition } from '../../data/deliveryoption.js';
 import { monyFormat } from '../utilis/mony.js';
 export function paymentSummary(){
     let totalPriceCents=0;
     let totalDeliveryOptionPrice=0;
+    let numberOfItemss=0;
 cart.forEach(cartItem => {
    const product= getProduct(cartItem.Id);
+   numberOfItemss+=numberOfItems(cartItem.Id);
    totalPriceCents+= product.priceCents*cartItem.quantity;
    const deliveryOptition=getDeliveryOpition(cartItem.deleveryId);
     totalDeliveryOptionPrice+= deliveryOptition.priceCents;
@@ -20,7 +22,7 @@ const totalCents=+totalBeforTaxCents+taxCents;
 const paymentSummaryHtml=`
 
      <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${numberOfItemss}):</div>
             <div class="payment-summary-money">$${monyFormat(totalPriceCents)}</div>
           </div>
 

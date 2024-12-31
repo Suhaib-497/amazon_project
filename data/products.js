@@ -6,12 +6,36 @@ export function getProduct(productId){
   
          if(productId===product.id){
              matchingitem = product;
-            
+               
          }
      });
 
+     
+
      return matchingitem;
+     
 }
+
+export function numberOfItems(productId){
+  let matchingitem;
+  let numberOfItem = 0;
+  products.forEach((product)=>{
+
+      if(productId===product.id){
+          matchingitem = product;
+            
+      }
+  });
+
+  if(matchingitem){
+   numberOfItem++;
+
+  }
+
+  return numberOfItem;
+}
+
+
 
 
 export const products = [
