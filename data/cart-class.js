@@ -1,4 +1,4 @@
-class Cart{
+ export default class Cart{
     cartItem;
     #localStorageKey;
 
@@ -96,12 +96,7 @@ class Cart{
 
 
     
-    const cart=new Cart('cart-oop');
-    const bussnisCart=new Cart('bussnis-cart');
-    
-    
-    console.log(cart)
-    console.log(bussnisCart)
+   
     
     
     

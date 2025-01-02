@@ -1,16 +1,20 @@
-import { cart, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
+// import { cart, removeFromCart, updateDeliveryOption } from '../../data/cart.js';
+import Cart from '../../data/cart-class.js'
 import { products, getProduct,numberOfItems } from '../../data/products.js';
 import { monyFormat } from '../utilis/mony.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryOpition } from '../../data/deliveryoption.js';
 import {paymentSummary} from './paymentsummary.js'
 const today = dayjs();
+
+const cart=new Cart('cart');
+console.log(cart);
  
 export function renderSummaryOrder() {
   let checkOutHtml = '';
  let numberOfItemss=0;
 
-  cart.forEach((item) => {
+  cart.cartItem.forEach((item) => {
     const productId = item.Id;
     const matchingitem = getProduct(productId);
      numberOfItemss += numberOfItems(productId);
@@ -89,7 +93,7 @@ function attachEventListeners() {
   document.querySelectorAll('.js-delete-quantity-link').forEach((button) => {
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
@@ -109,7 +113,7 @@ function attachEventListeners() {
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const { productId, deliveryOptionId } = element.dataset;
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderSummaryOrder();
       paymentSummary();
     });

@@ -1,16 +1,20 @@
-import {cart} from '../../data/cart.js'
+// import {cart} from '../../data/cart.js'
+import Cart from  '../../data/cart-class.js';
 import { getProduct,numberOfItems } from '../../data/products.js';
 import { getDeliveryOpition } from '../../data/deliveryoption.js';
 import { monyFormat } from '../utilis/mony.js';
+
+
 export function paymentSummary(){
+  const cart=new Cart('cart');
     let totalPriceCents=0;
     let totalDeliveryOptionPrice=0;
     let numberOfItemss=0;
-cart.forEach(cartItem => {
-   const product= getProduct(cartItem.Id);
-   numberOfItemss+=numberOfItems(cartItem.Id);
-   totalPriceCents+= product.priceCents*cartItem.quantity;
-   const deliveryOptition=getDeliveryOpition(cartItem.deleveryId);
+cart.cartItem.forEach(cartItems => {
+   const product= getProduct(cartItems.Id);
+   numberOfItemss+=numberOfItems(cartItems.Id);
+   totalPriceCents+= product.priceCents*cartItems.quantity;
+   const deliveryOptition=getDeliveryOpition(cartItems.deleveryId);
     totalDeliveryOptionPrice+= deliveryOptition.priceCents;
 });
 

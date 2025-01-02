@@ -1,9 +1,15 @@
-import {cart,addTOCart} from '../data/cart.js';
+// import {cart,addTOCart} from '../data/cart.js';
+import Cart from '../data/cart-class.js'
+
 import {products} from '../data/products.js';
 import { monyFormat } from './utilis/mony.js';
 
+
+const cart = new Cart('cart');
 let data='';
+
 products.forEach((product)=>{
+  
     data +=`
     <div class="product-container">
           <div class="product-image-container">
@@ -72,7 +78,7 @@ document.querySelector(".js-products-grid").innerHTML=data;
 
 function updateCartQuantity(){
   let cartQuantity=0;
-  cart.forEach((item)=>{
+  cart.cartItem.forEach((item)=>{
     cartQuantity+=item.quantity;
     console.log(item.quantity);
   })
@@ -90,7 +96,8 @@ document.querySelectorAll(".js-add-to-cart-button").forEach((button)=>{
     const quantity = Number(quantitySelector.value);
       
 
-    addTOCart(productId,quantity);
+    cart.addTOCart(productId,quantity);
+    
     updateCartQuantity();
       
    
